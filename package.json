@@ -1,0 +1,30 @@
+{
+  "name": "turtlebot",
+  "version": "1.0.0",
+  "description": "Turtle Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@k3rn31p4nic/google-translate-api": "github:k3rn31p4nic/google-translate-api",
+    "@tensorflow-models/mobilenet": "^2.0.4",
+    "@tensorflow/tfjs-node": "^2.3.0",
+    "cheerio": "^1.0.0-rc.3",
+    "csv-parser": "^2.3.3",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "file-system": "^2.2.2",
+    "google-translate-api": "^2.3.0",
+    "himalaya": "^1.1.0",
+    "jquery": "^3.5.1",
+    "languagedetect": "^2.0.0",
+    "minimist": "^1.2.5",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "winston": "^3.3.3",
+    "xlsx": "^0.16.3"
+  }
+}
