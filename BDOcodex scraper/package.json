@@ -1,0 +1,30 @@
+{
+  "name": "turtlebot",
+  "version": "1.0.0",
+  "description": "Turtle Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10",
+    "csv-parser": "^2.3.3",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "file-system": "^2.2.2",
+    "googleapis": "^39.2.0",
+    "himalaya": "^1.1.0",
+    "jquery": "^3.5.1",
+    "minimist": "^1.2.5",
+    "path": "^0.12.7",
+    "random": "^2.2.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "run-parallel": "^1.2.0",
+    "winston": "^3.3.3",
+    "xlsx": "^0.16.3"
+  }
+}
