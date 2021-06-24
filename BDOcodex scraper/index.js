@@ -76,6 +76,124 @@ client.on('message', async msg => {
 
     }
 
+	/**
+	Geta knowledge from most recent patch and appends it to a new file AND old
+	*/
+	//TODO ~ Potentially develop similar to this, and below, for NPC's etc etc
+	if (command == "patchKnowledge") {
+		array2 = [];
+		array3 = [];
+		array4 = [];
+		array = [];
+		
+			//Deletes old file so its overwritten
+			fs.unlink('C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/KnowledgeOnPatch.csv', (err) => {
+                if (err)
+                    throw err;
+            });
+			console.log("File deleted")
+
+        const result2 = await request.get("https://bdocodex.com/us/");
+
+        const $$ = cheerio.load(result2);
+
+        //Finds dates for all recently added items from patch
+        $$("body > nav > div.container2").each((index, element) => {
+            //console.log($(element).text());
+            var testing = $$(element).text().split('\n');
+            for (var i = 0; i < testing.length; i++) {
+                array2.push((testing[i].substring(1, testing[i].length - 1)).split(",")[0]);
+            }
+            array3.push(array2[338]);
+        });
+        //Adds it all to an array full of dates ordered dd-mm-yyyy
+        array4.push(array3.toString().replace(/\s/g, '').match(/.{1,10}/g)[0]);
+
+        const test2 = array4.toString();
+        //Reverses to yyyymmdd
+        const test3 = test2.split("-").reverse().join("");
+
+        const result = await request.get("https://bdocodex.com/query.php?a=themes&type=version&slot=" + test3 + "&l=us");
+
+        const $ = cheerio.load(result);
+
+        //Uses first date in the list search for the page full of items added that patch
+        $("body > div > div").each((index, element) => {
+            var test = $(element).text().split('data-id=\\"theme-');
+            for (var i = 0; i < test.length; i++) {
+                array.push((test[i].substring(1, test[i].length - 1)).split("\\")[0]);
+            }
+
+        });
+        //Adds it to an array full of item IDs
+        array.shift();
+
+        //Length of the ID arrray
+        for (var i = 0; i < array.length; i++) {
+            //Searches for the item
+            const result3 = await request.get("https://bdocodex.com/us/theme/" + array[i] + "/");
+            console.log("Current position: " + i + "/" + array.length);
+            const $$$ = cheerio.load(result3);
+
+            //Searches for the specific item information and outputs it to another array
+            $$$("body > div.container > div > div.col-sm-12.col-md-8.col-lg-9 > div > div.outer.item_info > div > table > tbody > tr:nth-child(1) > td").each((index, element) => {
+                id = ($(element).text())
+                //console.log($(element).text())
+            });
+
+            //Name
+            $$$("#item_name").each((index, element) => {
+                itemName = ($(element).text())
+                //console.log($(element).text())
+            });
+
+            //Category
+            $$$("body > div.container > div > div.col-sm-12.col-md-8.col-lg-9 > div > div.outer.item_info > div > table > tbody > tr:nth-child(4) > td.valign_top").each((index, element) => {
+                category = ($(element).text())
+                //console.log($(element).text())
+            });
+
+            //Description
+            $$$("body > div.container > div > div.col-sm-12.col-md-8.col-lg-9 > div > div.outer.item_info > div > table > tbody > tr:nth-child(5) > td").each((index, element) => {
+                description = ($(element).text())
+                //console.log($(element).text())
+            });
+
+            //Link
+            $$$('body > div.container > div > div.col-sm-12.col-md-8.col-lg-9 > div > div.outer.item_info > div > table > tbody > tr:nth-child(5) > td > a').each(function () {
+                links = "https://bdocodex.com" + $(this).attr('href');
+                //console.log(links)
+            });
+			
+			var knowledgeData = [['\n'], [id], [itemName], [category], [description], [links]]
+            var st = knowledgeData.join(';');
+
+            var st2 = st.replace(/\r?\n|\r/g, " ")
+                var st3 = "\n" + st2.substring(2)
+				var st4 = st2.substring(2) + "\n"
+
+//Appends to the current knowledge file
+                fs.appendFile('C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/Knowledge.csv', st3, (err) => {
+                if (err)
+                    throw err;
+            });
+			
+			//Appends to a new file for that patch
+			fs.appendFile('C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/KnowledgeOnPatch.csv', st4, (err) => {
+                if (err)
+                    throw err;
+            });
+
+            //console.log("First Item: " + "\n" + fullItems[0]);
+            //console.log("\n" + "Last Item: " + "\n" + fullItems[fullItems.length-1]);
+
+        }
+        console.log("finished")
+
+    }
+
+
+
     /** Developed on ~ 18/06/2021
     Current date testing is: 16-06-2021 with the following IDs:
     [
