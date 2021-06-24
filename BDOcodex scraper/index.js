@@ -26,11 +26,11 @@ var fullItems = [];
 var uniqueArray = [];
 var finialIds = ""
 
-    const pathToFileBot = path.join("C:/Users/bensa/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID", "KnowledgeIds.csv")
+    const pathToFileBot = path.join("C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID", "KnowledgeIds.csv")
 
     file.readFile === fs.readFile
 
-    var workbookPrice = XLSX.readFile('C:/Users/bensa/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/test.txt');
+    var workbookPrice = XLSX.readFile('C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/test.txt');
 var sheet_name_list_price = workbookPrice.SheetNames;
 var xlDataPrice = XLSX.utils.sheet_to_json(workbookPrice.Sheets[sheet_name_list_price]);
 
@@ -136,7 +136,7 @@ client.on('message', async msg => {
         array.shift();
 
         //Length of the ID arrray
-        for (var i = 80; i < array.length; i++) {
+        for (var i = 0; i < array.length; i++) {
             //Searches for the item
             const result3 = await request.get("https://bdocodex.com/us/item/" + array[i] + "/");
             console.log("Current position: " + i + "/" + array.length);
@@ -188,7 +188,7 @@ client.on('message', async msg => {
     //https://bdocodex.com/us/theme/   from 0 - 10424 which includes all knowedge in the game
     if (command == "theme") {
 
-        fs.appendFile('C:/Users/bensa/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/Knowledge.csv', csvStartRow.join(''), (err) => {
+        fs.appendFile('C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/Knowledge.csv', csvStartRow.join(''), (err) => {
             if (err)
                 throw err;
         });
@@ -234,7 +234,7 @@ client.on('message', async msg => {
             var st2 = st.replace(/\r?\n|\r/g, " ")
                 var st3 = "\n" + st2.substring(2)
 
-                fs.appendFile('C:/Users/bensa/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/Knowledge.csv', st3, (err) => {
+                fs.appendFile('C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/Knowledge.csv', st3, (err) => {
                 if (err)
                     throw err;
             });
@@ -278,7 +278,7 @@ client.on('message', async msg => {
             return knowledgeIds.indexOf(elem) == pos;
         })
 
-            fs.appendFile('C:/Users/bensa/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/KnowledgeIds.csv', uniqueArray.join('\n'), (err) => {
+            fs.appendFile('C:/Users/Documents/Discord_Bot/Bot Talk Group/Bot2/KnowledgeID/KnowledgeIds.csv', uniqueArray.join('\n'), (err) => {
             if (err)
                 throw err;
         });
